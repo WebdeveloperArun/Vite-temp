@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import {Link} from "react-router-dom"
 
 const Header = () => {
   const authentication = useSelector((state) => state.auth.status)
+  
   const [items, setItems] = useState([
     {
       id: 1,
@@ -32,13 +34,17 @@ const Header = () => {
     }
   ])
   return (
-    <div className='w-full flex justify-evenly bg-blue-400'>
+    <div className='w-full flex justify-between bg-blue-400'>
       <div>Logo</div>
+      <div className='flex'>
       { items.map((item) => {
        if(item.authRequire === false){
-          return <div key={item.id}>{item.text}</div>
+          return <button className='px-2' key={item.id}>
+                {item.text}
+            </button>
         }
      })}
+     </div>
     </div>
   )
 }
